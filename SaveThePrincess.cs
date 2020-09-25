@@ -35,8 +35,6 @@ namespace SaveThePrincess
 
         Random random = new Random();
 
-
-
         public SaveThePrincess()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -83,7 +81,6 @@ namespace SaveThePrincess
                 zoraPositions.Add(zoraPosition);
                 zoras.Add(zora);
             }
-
 
             base.Initialize();
         }
@@ -187,9 +184,17 @@ namespace SaveThePrincess
             else if (linkPosition.Y <= link.Height * 2.5f) // top
                 linkPosition.Y = link.Height * 2.5f;
 
+            // zora movement & boundaries
+            ZoraUpdates();
 
+            #endregion
 
-            // zora movement
+            timeSinceLastMovement += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            base.Update(gameTime);
+        }
+
+        private void ZoraUpdates()
+        {
             for (int i = 0; i < zoraPositions.Count - 1; i++)
             {
                 var newPosition = new Vector2();
@@ -205,7 +210,6 @@ namespace SaveThePrincess
                     xDirection = randomSignX ? xDirection + random.Next(1, 3) * -1.5f : xDirection + random.Next(1, 3) * 1.5f;
                     yDirection = randomSignY ? yDirection + random.Next(1, 3) * -1 : yDirection + random.Next(1, 3);
 
-
                     // boundaries zora
                     if (xDirection >= _graphics.PreferredBackBufferWidth - zoras[i].Width * 2) // right
                         xDirection = _graphics.PreferredBackBufferWidth - zoras[i].Width * 2 - 200;
@@ -217,7 +221,6 @@ namespace SaveThePrincess
                     else if (yDirection <= zoras[i].Height * 2.5f) // top
                         yDirection = zoras[i].Height * 2.5f + 150;
 
-
                     newPosition = new Vector2(xDirection, yDirection);
                     zoraPositions[i] = newPosition;
 
@@ -226,27 +229,19 @@ namespace SaveThePrincess
                         timeSinceLastMovement = 0f;
                     }
                 }
-                else
-                {
-                    newPosition = zoraPositions[i];
-                }
             }
-
-            
-            #endregion
-
-            timeSinceLastMovement += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime) // Add your drawing code here
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             _spriteBatch.Begin();
+
             _spriteBatch.Draw(characterTexture, new Vector2(linkPosition.X - zelda.Width * 2, linkPosition.Y), link.SourceRectangle, Color.White, 0, new Vector2(link.Width / 2, link.Height / 2), 3.0f, SpriteEffects.None, 1);
             _spriteBatch.Draw(characterTexture, new Vector2(zeldaPosition.X + zelda.Width * 2, zeldaPosition.Y), zelda.SourceRectangle, Color.White, 0, new Vector2(zelda.Width / 2, zelda.Height / 2), 3.0f, SpriteEffects.None, 1);
 
+            // draw the zoras
             for (int i = 0; i < zoraPositions.Count - 1; i++)
             {
                 _spriteBatch.Draw(characterTexture, zoraPositions[i], zoras[i].SourceRectangle, Color.White, 0, new Vector2(zoras[i].Width / 2, zoras[i].Height / 2), 3.0f, SpriteEffects.None, 1);
