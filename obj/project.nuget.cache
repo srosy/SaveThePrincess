@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2Jq+6uRfKoXFOVntD1BFIUFV2vmt758G8l7XfLfYLeo324uRlrYcwPfIcb50he7Z00GnsddVtkX39+z7dv5Ctw==",
+  "success": true,
+  "projectFilePath": "E:\\Programming\\Monogame\\SaveThePrincess\\SaveThePrincess.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\seros\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\seros\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\seros\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
